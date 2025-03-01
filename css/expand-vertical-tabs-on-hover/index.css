@@ -112,3 +112,8 @@
 		mask-image: linear-gradient(to left, transparent, black var(--tab-label-mask-size)) !important;
 	}
 }
+
+/* Hide the splitter between the sidebar and the content area */
+#sidebar-launcher-splitter {
+	display: none !important;
+}
