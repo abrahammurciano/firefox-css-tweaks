@@ -49,7 +49,16 @@ This tweak improves the visual indication of the currently active tab in Firefox
 
 ## Installation
 
-To install any or all of these tweaks, you must first enable `userChrome.css` support in Firefox and then copy the desired CSS files to the appropriate folders in your user profile directory. To do this, follow these steps:
+### Automatic Installation (Linux)
+
+To install any or all of these tweaks automatically on Linux, you can use the provided `install.sh` script.
+```sh
+curl -s https://raw.githubusercontent.com/abrahamm/firefox-css-tweaks/main/install.sh | bash -s
+```
+
+### Manual Installation
+
+To install any or all of these tweaks manually, you must first enable `userChrome.css` support in Firefox and then copy the desired CSS files to the appropriate folders in your user profile directory. To do this, follow these steps:
 
 ### 1. Enable `userChrome.css` Support
 1. Open Firefox and type in the address bar: `about:config` (accept the warning message if it appears).
@@ -58,10 +67,10 @@ To install any or all of these tweaks, you must first enable `userChrome.css` su
 ### 2. Find the User Profile Folder
 1. Type in the address bar: `about:support`.
 1. Look for the **Profile Folder** or **Profile Directory** section and click **Open Folder** or **Open Directory**.
-1. Inside the profile folder, locate (or create if it doesn't exist) a folder named `chrome`, and inside it, another folder named `css`.
+1. Inside the profile folder, locate (or create if it doesn't exist) a folder named `chrome`, and inside it, another folder named `tweaks`.
 
 ### 3. Apply Tweaks
-1. Each tweak in this repository has its own folder under `css/`. Copy the folder of the tweak you want into the `chrome/css` folder in your user profile directory (the one you located/created in the previous step).
+1. Each tweak in this repository has its own folder under `tweaks/`. Copy the folder of the tweak you want into the `chrome/tweaks` folder in your user profile directory (the one you located/created in the previous step).
 1. Copy the `userChrome.css` file from this repository into the `chrome` folder. If it already exists, append the content of this file to the existing one.
 1. Uncomment the `@import` line for the tweak you want to apply in the `userChrome.css` file by removing the `/*` and `*/` around it.
 1. Restart Firefox for the changes to take effect.
