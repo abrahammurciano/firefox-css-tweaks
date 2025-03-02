@@ -49,27 +49,39 @@ This tweak improves the visual indication of the currently active tab in Firefox
 
 ## Installation
 
-### Automatic Installation (Linux)
+### Firefox Settings
 
-To install any or all of these tweaks automatically on Linux, you can use the provided `install.sh` script.
+For these tweaks to work, you must change some settings in Firefox. Go to `about:config` and set the following preferences:
+
+Setting | Value | Description | Required By
+--- | --- | --- | ---
+`toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | Enable `userChrome.css` support | All tweaks
+`sidebar.verticalTabs` | `true` | Enable vertical tabs | `expand-vertical-tabs-on-hover`, `better-active-tab-indicator`
+`sidebar.visibility` | `always-show` | Always show the sidebar | `expand-vertical-tabs-on-hover`, `better-active-tab-indicator`
+
+
+### Automatic Installer (Linux)
+
+To install/upgrade any or all of these tweaks automatically on Linux, you can use the provided `install.sh` script.
+
 ```sh
-curl -s https://raw.githubusercontent.com/abrahamm/firefox-css-tweaks/main/install.sh | bash -s
+curl -s https://raw.githubusercontent.com/abrahamm/firefox-css-tweaks/main/install.sh | bash -s install
 ```
+
+The installer will prompt you to select which firefox profile you want to install the tweaks to as well as which tweaks you want to enable. Use `--all-tweaks`, `--all-profiles`, or `--all` to install all tweaks, to all profiles, or both respectively.
+
+To uninstall the tweaks, run the script replacing `install` with `uninstall`.
 
 ### Manual Installation
 
 To install any or all of these tweaks manually, you must first enable `userChrome.css` support in Firefox and then copy the desired CSS files to the appropriate folders in your user profile directory. To do this, follow these steps:
 
-### 1. Enable `userChrome.css` Support
-1. Open Firefox and type in the address bar: `about:config` (accept the warning message if it appears).
-1. Set the preference `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`.
-
-### 2. Find the User Profile Folder
+### 1. Find the User Profile Folder
 1. Type in the address bar: `about:support`.
 1. Look for the **Profile Folder** or **Profile Directory** section and click **Open Folder** or **Open Directory**.
 1. Inside the profile folder, locate (or create if it doesn't exist) a folder named `chrome`, and inside it, another folder named `tweaks`.
 
-### 3. Apply Tweaks
+### 2. Apply Tweaks
 1. Each tweak in this repository has its own folder under `tweaks/`. Copy the folder of the tweak you want into the `chrome/tweaks` folder in your user profile directory (the one you located/created in the previous step).
 1. Copy the `userChrome.css` file from this repository into the `chrome` folder. If it already exists, append the content of this file to the existing one.
 1. Uncomment the `@import` line for the tweak you want to apply in the `userChrome.css` file by removing the `/*` and `*/` around it.
@@ -77,7 +89,9 @@ To install any or all of these tweaks manually, you must first enable `userChrom
 
 ## Customization
 
-Each tweak may provide customization options at the top of its `index.css` file. You can modify these values to change the appearance and behavior of the tweak to suit your preferences. For example, for `expand-vertical-tabs-on-hover`, the customization options may look like this:
+Each tweak specifies its customization options in `options.css`. You can override any of these options in `custom-options.css`. This way you can customize any tweak without modifying the original CSS files, so the installation script can update them while keeping your customizations.
+
+For example, for `expand-vertical-tabs-on-hover`, the customization options may look like this:
 
 ```css
 :root {

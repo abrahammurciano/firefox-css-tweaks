@@ -1,0 +1,8 @@
+:root {
+	--tweaks-evtoh-collapsed-width: 50px;
+	--tweaks-evtoh-expanded-width: 250px;
+	--tweaks-evtoh-tab-padding: 10px;
+	--tweaks-evtoh-tab-margin: calc((var(--tweaks-evtoh-collapsed-width) - var(--tweaks-evtoh-tab-padding) * 2 - var(--icon-size-default)) / 2);
+	--tweaks-evtoh-animation-duration: 50ms;
+	--chrome-content-separator-color: transparent !important;
+}
