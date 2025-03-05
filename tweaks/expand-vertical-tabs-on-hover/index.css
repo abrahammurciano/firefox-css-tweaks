@@ -62,6 +62,11 @@
 	& .toolbarbutton-text {
 		transition: opacity var(--tweaks-evtoh-animation-duration) ease, width var(--tweaks-evtoh-animation-duration) ease !important;
 	}
+
+	/* Container coloured indicators */
+	& .tab-background .tab-context-line {
+		margin-inline-start: 0px !important;
+	}
 }
 
 /* Collapsed state */
