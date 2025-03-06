@@ -1,8 +1,10 @@
 @import "./options.css";
 @import "./custom-options.css";
 
-#sidebar-main {
-	& .tab-background[selected]::before {
+#sidebar-main .tab-background {
+	position: relative !important;
+
+	&[selected]::before {
 		content: "";
 		position: absolute;
 		top: 0;

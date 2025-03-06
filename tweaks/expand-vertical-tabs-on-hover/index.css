@@ -12,21 +12,18 @@
 
 	& #vertical-pinned-tabs-container,
 	& #tabbrowser-arrowscrollbox {
-		padding: 0 var(--tweaks-evtoh-tab-margin) !important;
 
 		& .tab-background,
-		& #tabs-newtab-button {
-			margin-inline: 0 !important;
-			width: 100% !important;
-		}
-
-		& .tab-content {
-			padding: 0 var(--tweaks-evtoh-tab-padding) !important;
-		}
-
+		& .tab-content,
 		& #tabs-newtab-button {
 			padding: 0 var(--tweaks-evtoh-tab-padding) !important;
+			width: calc(100% - 2 * var(--tweaks-evtoh-tab-margin)) !important;
+			margin: 0 auto !important;
 		}
+	}
+
+	& #tabbrowser-tabs>#vertical-pinned-tabs-container {
+		padding-inline: 0 !important;
 	}
 
 	/* Always show pinned tabs vertically */
@@ -61,6 +58,12 @@
 	& .tab-close-button,
 	& .toolbarbutton-text {
 		transition: opacity var(--tweaks-evtoh-animation-duration) ease, width var(--tweaks-evtoh-animation-duration) ease !important;
+	}
+
+	/* Container coloured indicators */
+	& .tab-background .tab-context-line {
+		margin-inline-start: calc(-1 * (var(--tweaks-evtoh-tab-margin) + var(--tweaks-evtoh-tab-padding))) !important;
+		margin-block: 4px !important;
 	}
 }
 
