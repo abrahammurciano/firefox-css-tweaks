@@ -51,6 +51,7 @@
 	/* Keep attention dot under icon, even when expanded */
 	& .tab-content[titlechanged]:not([selected]) {
 		background-position-x: calc(var(--tweaks-evtoh-tab-padding) + var(--icon-size-default) / 2 - 2px) !important;
+		background-position-y: bottom 2px !important;
 	}
 
 	/* Animate internal tab elements appearing and disappearing */
