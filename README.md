@@ -66,7 +66,7 @@ Setting | Value | Description | Required By
 To install/upgrade any or all of these tweaks automatically on Linux, you can use the provided `install.sh` script.
 
 ```sh
-curl -s https://raw.githubusercontent.com/abrahamm/firefox-css-tweaks/main/install.sh | bash -s install
+curl -s https://raw.githubusercontent.com/abrahammurciano/firefox-css-tweaks/main/install.sh | bash -s install
 ```
 
 The installer will prompt you to select which firefox profile you want to install the tweaks to as well as which tweaks you want to enable. Use `--all-tweaks`, `--all-profiles`, or `--all` to install all tweaks, to all profiles, or both respectively.
