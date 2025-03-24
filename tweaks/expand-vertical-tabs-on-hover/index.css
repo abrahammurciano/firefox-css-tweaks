@@ -66,6 +66,14 @@
 		margin-inline-start: calc(-1 * (var(--tweaks-evtoh-tab-margin) + var(--tweaks-evtoh-tab-padding))) !important;
 		margin-block: 4px !important;
 	}
+
+	/* Make tab group labels have consistent height */
+	& .tab-group-label {
+		margin-block: 0 !important;
+		padding-block: 0 !important;
+		height: var(--tweaks-evtoh-tab-group-label-height) !important;
+		min-height: var(--tweaks-evtoh-tab-group-label-height) !important;
+	}
 }
 
 /* Collapsed state */
@@ -108,6 +116,10 @@
 
 	.tab-label-container[textoverflow] {
 		mask-image: linear-gradient(to left, transparent, black var(--tab-label-mask-size)) !important;
+	}
+
+	tab-group::before {
+		inset-block-start: calc(var(--tweaks-evtoh-tab-group-label-height) + var(--space-small)) !important;
 	}
 }
 
