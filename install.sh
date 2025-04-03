@@ -11,6 +11,7 @@ usage() {
 	echo "  --all-tweaks          Install all the available tweaks instead of prompting for selection."
 	echo "  --all-profiles        Install tweaks to all Firefox profiles instead of prompting for selection."
 	echo "  -p, --profile <path>  Specify the path to the Firefox profile to install the tweaks to."
+	echo "  -v, --version <ver>   Specify the version of the tweaks to install. By default it's 'auto' (the latest version compatible with the current Firefox version). Other options are 'main' (the main branch) or you can specify a commit hash, tag, or branch."
 	echo "  help, -h, --help      Display this help message."
 	exit 1
 }
@@ -35,12 +36,33 @@ show-choices() {
 	echo "----------------------------------"
 }
 
+# Prompts the user to select a single option from a list of options
+# $1: The prompt message
+# $...: The options to choose from
+# Writes the selected option to stdout
+choice() {
+	print "$1"
+	shift
+	local options=("$@")
+	show-choices "${options[@]}" > /dev/stderr
+	local selected=""
+	while true; do
+		read -r -p "Enter your choice (1-${#options[@]}): " index < /dev/tty
+		if ! [[ "$index" =~ ^[0-9]+$ ]] || ((index < 1 || index > ${#options[@]})); then
+			print "Invalid choice. Please enter a number between 1 and ${#options[@]}."
+			continue
+		fi
+		echo "${options[index - 1]}"
+		return
+	done
+}
+
 # Prompts the user to select multiple options from a list of options
 # $1: The prompt message
 # $...: The options to choose from
 # Writes the selected options to stdout
 choices() {
-	print "${1:-Please select one or more options (space separated):}"
+	print "$1"
 	shift
 	local options=("$@")
 	show-choices "${options[@]}" > /dev/stderr
@@ -73,6 +95,7 @@ parse-args() {
 	ALL_TWEAKS=false
 	ALL_PROFILES=false
 	PROFILE=""
+	VERSION="auto"
 	shift
 
 	if [ "$ACTION" != "install" ] && [ "$ACTION" != "uninstall" ]; then
@@ -93,6 +116,10 @@ parse-args() {
 				;;
 			-p|--profile)
 				PROFILE="$2"
+				shift
+				;;
+			-v|--version)
+				VERSION="$2"
 				shift
 				;;
 			-h|--help)
@@ -143,8 +170,37 @@ get-profiles() {
 
 # Clone the repository to a temporary directory
 clone-repo() {
-	git clone https://github.com/abrahammurciano/firefox-css-tweaks.git "$1"
+	local url="https://github.com/abrahammurciano/firefox-css-tweaks.git"
+	print "Cloning repository from $url"
+	git clone "$url" "$1" 2>/dev/null || error "Failed to clone repository: $url"
 }
+
+
+# Determine the version of the repository to checkout automatically
+auto-version() {
+	local repo="$1"
+	local version
+	local tags=($(git -C "$repo" tag))
+	local firefox_version=$(firefox --version | grep -oP '\d+\.\d+' | cut -d. -f1)
+	local tag=$(printf '%s\n' "${tags[@]}" | grep -E "^$firefox_version-.*$" | sort -rV | head -n1)
+	if [ -z "$tag" ]; then
+		print "No compatible version found for Firefox $firefox_version."
+		tag=$(choice "Choose a version to install:" main "${tags[@]}")
+	fi
+	echo "$tag"
+}
+
+# Checkout the specified version of the repository
+checkout-version() {
+	local repo="$1"
+	local version="$2"
+	if [ "$version" = "auto" ]; then
+		version=$(auto-version "$repo")
+	fi
+	print "Checking out version: $version"
+	git -C "$repo" checkout "$version" 2>/dev/null || error "Failed to checkout version: $version"
+}
+
 
 # Enable a tweak in userChrome.css
 enable-tweak() {
@@ -218,6 +274,7 @@ main() {
 	local repo=$(mktemp -d)
 	trap "rm -rf $repo" EXIT
 	clone-repo "$repo" > /dev/stderr
+	checkout-version "$repo" "$VERSION"
 	local profiles=$(get-profiles)
 	for profile in $profiles; do
 		if [ "$ACTION" = "install" ]; then
