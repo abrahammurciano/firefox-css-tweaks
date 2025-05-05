@@ -1,6 +1,6 @@
 # Update: Firefox v138
 
-As of Firefox v138, [Expand Vertical Tabs on Hover](#expand-vertical-tabs-on-hover) no longer works, and I can't figure out how to fix it with plain CSS. However, a similar feature is now available natively. To use it, set the following options in `about:config`.
+As of Firefox v138, [Expand Vertical Tabs on Hover (Deprecated)](#expand-vertical-tabs-on-hover-deprecated) no longer works, and I can't figure out how to fix it with plain CSS. However, a similar feature is now available natively. To use it, set the following options in `about:config`.
 
 | Setting | Value | Description |
 | --- | --- | --- |
@@ -15,7 +15,7 @@ A collection of CSS tweaks for Firefox to customize its appearance and behavior.
 
 ## Table of Contents
 - [Tweaks](#tweaks)
-	- [Expand Vertical Tabs on Hover](#expand-vertical-tabs-on-hover)
+	- [Expand Vertical Tabs on Hover (Deprecated)](#expand-vertical-tabs-on-hover-deprecated)
 	- [Better Active Tab Indicator](#better-active-tab-indicator)
 - [Installation](#installation)
 	- [1. Enable `userChrome.css` Support](#1-enable-userchromecss-support)
@@ -25,7 +25,9 @@ A collection of CSS tweaks for Firefox to customize its appearance and behavior.
 
 ## Tweaks
 
-### Expand Vertical Tabs on Hover
+### Expand Vertical Tabs on Hover (Deprecated)
+
+> **NOTE**: This tweak has been removed as of version `138-1` since it no longer works with firefox 138. If you're using an older version of Firefox and want to use this tweak, you can find it in any tag older than `138-1`.
 
 This tweak enables vertical tabs in Firefox to automatically expand when hovering over them, displaying full tab titles with a smooth animation. This is a fork of [ENDE25/FIREFOX-tabs-hover-expand](https://github.com/ENDE25/FIREFOX-tabs-hover-expand).
 
