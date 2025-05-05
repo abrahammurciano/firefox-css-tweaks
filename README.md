@@ -1,3 +1,14 @@
+# Update: Firefox v138
+
+As of Firefox v138, [Expand Vertical Tabs on Hover](#expand-vertical-tabs-on-hover) no longer works, and I can't figure out how to fix it with plain CSS. However, a similar feature is now available natively. To use it, set the following options in `about:config`.
+
+| Setting | Value | Description |
+| --- | --- | --- |
+| sidebar.verticalTabs | true | Enable vertical tabs |
+| sidebar.visibility | expand-on-hover | Make the vertical tabs expand when you hover over them |
+| sidebar.revamp | true | Should be automatically enabled when you enable vertical tabs |
+| sidebar.animation.expand-on-hover.duration-ms | 50 | Speed up the animation when expanding the sidebar (optional, it's quite slow by default) |
+
 # Firefox CSS Tweaks
 
 A collection of CSS tweaks for Firefox to customize its appearance and behavior. These tweaks are applied using the `userChrome.css` file, which allows for customizing the browser's UI.
